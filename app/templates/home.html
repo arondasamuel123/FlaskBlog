@@ -1,12 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Learning to make a blog Web App</h1>
-</body>
-</html>
+{%extends 'base.html'%}
+
+{%block content%}
+{{super()}}
+
+<header class="masthead">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>Flask Blog</h1>
+            <span class="subheading">A Blog about Flask and what I have learnt</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+<br>
+<br>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-preview">
+          <a href="post.html">
+            <h2 class="post-title">
+              Man must explore, and this is exploration at its greatest
+            </h2>
+            <h3 class="post-subtitle">
+              Problems look mighty small from 150 miles up
+            </h3>
+          </a>
+          <p class="post-meta">Posted by
+            <a href="#">Start Bootstrap</a>
+            on September 24, 2019</p>
+        </div>
+    
+        
+    
+      </div>
+    </div>
+  </div>
+
+{%endblock%}
