@@ -28,10 +28,11 @@
             <h2 class="post-title">
               {{post.title}}
             </h2>
+          </a>
             <h3 class="post-subtitle">
               {{post.blog}}
             </h3>
-          </a>
+          
           <p class="post-meta">Posted by:
             {{post.user.username}}</a>
             {{post.blog_created}}</p>
@@ -42,6 +43,12 @@
       </div>
     </div>
     {%endfor%}
+
+    <blockquote class="blockquote">
+      
+      <i>{{quote.quote}}</i><br>
+      <i>{{quote.author}}</i>
+    </blockquote>
   </div>
 
 {%endblock%}

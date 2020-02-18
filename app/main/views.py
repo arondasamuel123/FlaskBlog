@@ -5,10 +5,12 @@ from flask_login import current_user, login_required
 from .forms import PostForm, CommentForm, UpdateBlogForm
 from .. import db
 from sqlalchemy import desc
+from ..requests import get_quotes
 @main.route('/')
 def home():
     posts = Posts.query.order_by(Posts.blog_created.desc()).all()
-    return render_template('home.html', posts=posts)
+    quote = get_quotes()
+    return render_template('home.html', posts=posts, quote=quote)
 
 @main.route('/writer')
 def writer():
