@@ -20,5 +20,5 @@ class PostsModelTest(unittest.TestCase):
 
 
     def test_save_post(self):
-        self.new_review.save_review()
+        self.new_post.save_post()
         self.assertTrue(len(Posts.query.all())>0)

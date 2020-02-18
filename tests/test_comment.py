@@ -12,14 +12,14 @@ class CommentModelTest(unittest.TestCase):
     def tearDown(self):
         Posts.query.delete()
         User.query.delete()
+        Comment.query.delete()
         
     def test_check_instance_variables(self):
-        self.assertEquals(self.new_post.title,"Youre testing")
-        self.assertEquals(self.new_post.blog,"This is the test of the century")
-        self.assertEquals(self.new_post.category,"my-thoughts")
-        self.assertEquals(self.new_post.user,self.user_James)
+        self.assertEquals(self.new_comment.title,"Youre testing")
+        self.assertEquals(self.new_comment.user,self.user_James)
+        self.assertEquals(self.new_comment.post,self.new_post)
 
 
-    def test_save_post(self):
-        self.new_review.save_review()
-        self.assertTrue(len(Posts.query.all())>0)
+    def test_save_comment(self):
+        self.new_comment.save_comment()
+        self.assertTrue(len(Comment.query.all())>0)
