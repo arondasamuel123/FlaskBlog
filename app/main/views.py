@@ -75,7 +75,7 @@ def update_blog(id):
     update_form = UpdateBlogForm()
     if update_form.validate_on_submit():
         blog_update.title = update_form.title.data
-        blog_update.post = update_form.post.data
+        blog_update.blog = update_form.post.data
         blog_update.category = update_form.category.data
         
         db.session.add(blog_update)
