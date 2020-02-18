@@ -1,0 +1,2 @@
+Hello {{user.username}}
+A new post has arrived. Go checkout, we sure you will like it 

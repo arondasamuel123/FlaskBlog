@@ -6,6 +6,7 @@ from .forms import PostForm, CommentForm, UpdateBlogForm
 from .. import db
 from sqlalchemy import desc
 from ..requests import get_quotes
+from ..email import mail_message
 @main.route('/')
 def home():
     posts = Posts.query.order_by(Posts.blog_created.desc()).all()
@@ -29,6 +30,9 @@ def create_post():
         if post_form.validate_on_submit():
             post = Posts(title=post_form.title.data, category=post_form.category.data, blog=post_form.post.data,user=current_user)
             post.save_post()
+            users = User.query.filter_by(user_type='User').all()
+            for user in users:
+                mail_message("New Post has arrived", "email/new_post", user.email, user=user)
             return redirect(url_for('main.writer'))
     else:
         return "This page is for only writers"
@@ -71,7 +75,7 @@ def delete_blog(id):
     db.session.delete(delete_post)
     db.session.commit()
     
-    return redirect(url_for('main.delete_blog'))
+    return redirect(url_for('main.writer'))
 
     # return "Post Deleted"
     
