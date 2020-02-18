@@ -3,11 +3,13 @@
 
 {%block content%}
 {{super()}}
+<br>
+<br>
+<br>
+<h1 align="center">LOGIN PAGE</h1>
     <div class="row">
-        {% for message in get_flashed_messages() %}
-        {{ message }}
-        {% endfor %}
-    <div class="col-md-6">
+       
+    <div style="margin-left: 500px;" class="col-md-6">
         {{wtf.quick_form(login_form)}}
         <p> Don't have an account? <a href="{{url_for('auth.register')}}">Sign up here</a></p>
     </div>

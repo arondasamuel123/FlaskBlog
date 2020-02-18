@@ -58,6 +58,12 @@ def get_comments(id):
     
     return render_template('viewcomment.html', comments=comments)
 
+@main.route('/dcomment/<int:id>')
+def delete_comment(id):
+    delete_comm = Comment.query.filter_by(id=id).first()
+    db.session.delete(delete_comm)
+    db.session.commit()
+
 @main.route('/dblog/<int:id>', methods=['GET', 'POST'])
 def delete_blog(id):
     
