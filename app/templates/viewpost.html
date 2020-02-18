@@ -1,0 +1,33 @@
+{%extends 'base.html'%}
+
+{%block content%}
+{{super()}}
+
+<div class="container">
+    {%for p in post%}
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-preview">
+          <a href="/post/{{post.id}}">
+            <h2 class="post-title">
+            </h2>
+            <h3 class="post-subtitle">
+              {{p.blog}}
+            </h3>
+          </a>
+          <p class="post-meta">Posted by
+            
+            {{p.blog_created}}</p>
+        </div>
+    
+        
+    
+      </div>
+    </div>
+    {%endfor%}
+
+    Add comments
+  </div>
+
+
+{%endblock%}

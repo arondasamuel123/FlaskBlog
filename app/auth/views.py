@@ -30,7 +30,7 @@ def login():
         elif user.user_type =='User' and user.verify_password(login_form.password.data):
             login_user(user, login_form.remember.data)
             return redirect(url_for('main.home'))
-        flash('Invalid Username or Password')
+    flash('Invalid Username or Password')
     return render_template('auth/login.html', login_form=login_form)
             
 @auth.route('/logout')
