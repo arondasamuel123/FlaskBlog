@@ -4,15 +4,18 @@ from app.models import Posts, User, Comment
 from flask_login import current_user, login_required
 from .forms import PostForm, CommentForm, UpdateBlogForm
 from .. import db
+from sqlalchemy import desc
 @main.route('/')
 def home():
-    posts = Posts.query.all()
+    posts = Posts.query.order_by(Posts.blog_created.desc()).all()
     return render_template('home.html', posts=posts)
 
 @main.route('/writer')
 def writer():
-    posts = Posts.query.all()
-    return render_template('writer.html',posts=posts)
+    posts = Posts.query.order_by(Posts.blog_created.desc()).all()
+    user = current_user
+    if user.user_type=='Writer':
+        return render_template('writer.html',posts=posts)
 
 @main.route('/create', methods=['GET','POST'])
 @login_required
@@ -58,11 +61,6 @@ def get_comments(id):
     
     return render_template('viewcomment.html', comments=comments)
 
-@main.route('/dcomment/<int:id>')
-def delete_comment(id):
-    delete_comm = Comment.query.filter_by(id=id).first()
-    db.session.delete(delete_comm)
-    db.session.commit()
 
 @main.route('/dblog/<int:id>', methods=['GET', 'POST'])
 def delete_blog(id):
@@ -89,6 +87,15 @@ def update_blog(id):
         return "Blog updated"
     
     return render_template("update.html", update_form=update_form)
+
+@main.route('/dcomment/<int:id>', methods=['GET', 'POST'])
+def delete_comment(id):
+    delete_comm = Comment.query.filter_by(id=id).first()
+    db.session.delete(delete_comm)
+    db.session.commit()
+    
+    return redirect(url_for('main.writer'))
+
         
     
         
