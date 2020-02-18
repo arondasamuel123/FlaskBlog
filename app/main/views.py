@@ -3,6 +3,7 @@ from flask import render_template, url_for,redirect
 from app.models import Posts, User, Comment
 from flask_login import current_user, login_required
 from .forms import PostForm, CommentForm
+from .. import db
 @main.route('/')
 def home():
     posts = Posts.query.all()
@@ -56,6 +57,16 @@ def get_comments(id):
     comments = Comment.query.filter_by(post_id=id).all()
     
     return render_template('viewcomment.html', comments=comments)
+
+@main.route('/dblog/<int:id>', methods=['GET', 'POST'])
+def delete_blog(id):
+    
+    delete_post = Posts.query.filter_by(id=id).first()
+    db.session.delete(delete_post)
+    db.session.commit()
+    
+    return redirect(url_for('main.delete_blog'))
+    # return "Post Deleted"
         
             
 

@@ -31,8 +31,8 @@
             <a href="#">{{post.user.username}}</a>
             {{post.blog_created}}</p>
         </div>
-    
-        
+        <a class="btn btn-info" href="/ublog/{{post.id}}">Update Blog</a>
+        <a class="btn btn-danger" href="/dblog/{{post.id}}">Delete Blog</a>
         <a class="btn btn-primary" href="/viewcomments/{{post.id}}">View Comments</a>
       </div>
     </div>
