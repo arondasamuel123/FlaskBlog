@@ -2,7 +2,7 @@ from . import  main
 from flask import render_template, url_for,redirect
 from app.models import Posts, User, Comment
 from flask_login import current_user, login_required
-from .forms import PostForm, CommentForm
+from .forms import PostForm, CommentForm, UpdateBlogForm
 from .. import db
 @main.route('/')
 def home():
@@ -66,7 +66,25 @@ def delete_blog(id):
     db.session.commit()
     
     return redirect(url_for('main.delete_blog'))
+
     # return "Post Deleted"
+    
+@main.route('/ublog/<int:id>', methods=['GET', 'POST'])
+def update_blog(id):
+    blog_update = Posts.query.filter_by(id=id).first()
+    update_form = UpdateBlogForm()
+    if update_form.validate_on_submit():
+        blog_update.title = update_form.title.data
+        blog_update.post = update_form.post.data
+        blog_update.category = update_form.category.data
+        
+        db.session.add(blog_update)
+        db.session.commit()
+        return "Blog updated"
+    
+    return render_template("update.html", update_form=update_form)
+        
+    
         
             
 
