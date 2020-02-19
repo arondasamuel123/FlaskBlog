@@ -11,7 +11,11 @@ from ..email import mail_message
 def home():
     posts = Posts.query.order_by(Posts.blog_created.desc()).all()
     quote = get_quotes()
-    return render_template('home.html', posts=posts, quote=quote)
+    user = current_user
+    if user.user_type=='User':
+        return render_template('home.html', posts=posts, quote=quote)
+    else:
+        return render_template('notuser.html')
 
 @main.route('/writer')
 def writer():
@@ -45,6 +49,7 @@ def get_post(id):
     
     return render_template('viewpost.html', post=post)
 @main.route('/createcomment/<int:id>', methods=['GET', 'POST'])
+@login_required
 def create_comment(id):
     comment_post = Posts.query.get(id)
     user = current_user
